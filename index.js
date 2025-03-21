@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const jwt=require('jsonwebtoken')
 const cookieParser=require('cookie-parser')
 const User=require('./models/user')
+require('dotenv').config()
+const dbURL=process.env.DB_URL
 const app=express()
 
 app.set('view engine','ejs')
@@ -13,9 +15,9 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json());
 app.use(cookieParser())
 
-const secret='thisIsMySecret'
+const secret=process.env.SECRET
 
-mongoose.connect('mongodb://localhost:27017/renderxUser', {
+mongoose.connect(dbURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => console.log("MongoDB Connected")).catch(err => console.log("Error:", err));
