@@ -157,4 +157,4 @@ app.get('/imageEnhancer',authenticationMiddleWare,(req,res)=>{
     res.render('mainPage.ejs')
 })
 
-app.listen(3000)
+app.listen(process.env.PORT || 3000)

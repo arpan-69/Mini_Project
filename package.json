@@ -4,7 +4,8 @@
   "description": "\"Mini Project: Bidirectional Image Conversion: Sketch to Real and Real to Sketch\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
   },
   "keywords": [],
   "author": "",
