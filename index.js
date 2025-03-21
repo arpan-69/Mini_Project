@@ -128,7 +128,6 @@ app.post("/login", async (req, res) => {
 });
 
 
-
 app.get('/',(req,res)=>{
     res.render('landing.ejs')
 })
@@ -156,5 +155,17 @@ app.get('/choseModel',authenticationMiddleWare,(req,res)=>{
 app.get('/imageEnhancer',authenticationMiddleWare,(req,res)=>{
     res.render('mainPage.ejs')
 })
+
+app.get("/logout", (req, res) => {
+    res.clearCookie("clientToken", {
+        httpOnly: true,
+        secure: false, 
+        sameSite: "Lax"
+    });
+    console.log("✅ User logged out. Cookie cleared.");
+
+    res.redirect("/login");
+});
+
 
 app.listen(process.env.PORT || 3000)

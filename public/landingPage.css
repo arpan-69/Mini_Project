@@ -57,6 +57,10 @@ header {
     text-shadow: 0 0 10px #000000, 0 0 20px #63bb8f;
 }
 
+nav{
+    display: flex;
+    gap: 30px;
+}
 
 /* Nav Links Hover Effect */
 nav a {
@@ -168,9 +172,9 @@ button:active, .btn:active {
     }
 
     nav {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        gap: 10px;
+        gap: 20px;
     }
 
     .hero h1 {

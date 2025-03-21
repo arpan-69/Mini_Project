@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "av5.png", "av6.png", "av7.png", "av8.png"
     ];
     const randomImage = images[Math.floor(Math.random() * images.length)];
-    document.getElementById("profileImage").src = "/images/profiles/" + randomImage;
+    document.getElementById("profileImage").src = randomImage;
 
     document.getElementById("fileInput").addEventListener("change", function () {
         const fileNameDisplay = document.getElementById("fileName");
@@ -224,3 +224,120 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.logout = logout;
 });
+
+
+let imageCount = 0;
+let imageUploaded = false;
+let imageEnhanced = false;
+
+// 🔹 Fetch stored image count from backend
+async function fetchImageCount() {
+    const email = localStorage.getItem("userEmail"); // Get stored email
+
+    if (!email) {
+        console.error("No email found. User might not be logged in.");
+        return;
+    }
+
+    try {
+        const response = await fetch("http://127.0.0.1:5000/get_image_count", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+        if (response.status === 200) {
+            imageCount = data.image_count; // ✅ Set correct count
+            document.getElementById("imageCountBtn").innerText = `Image Counter: ${imageCount}`;
+        } else {
+            console.error("Error fetching image count:", data.message);
+        }
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+}
+
+// 🔹 Fetch count when page loads
+document.addEventListener("DOMContentLoaded", fetchImageCount);
+
+// 🔹 Detect file upload
+document.getElementById("fileInput").addEventListener("change", function(event) {
+    if (event.target.files.length > 0) {
+        imageUploaded = true;
+        updateCounter();
+    }
+});
+
+// 🔹 Detect enhance button click
+document.getElementById("enhanceBtn").addEventListener("click", function() {
+    imageEnhanced = true;
+    updateCounter();
+});
+
+// 🔹 Only increase counter when both actions are done
+async function updateCounter() {
+    if (imageUploaded && imageEnhanced) {
+        imageCount += 1;
+        document.getElementById("imageCountBtn").innerText = `Image Counter: ${imageCount}`;
+
+        // 🔹 Update image count in backend
+        await updateImageCount();
+
+        imageUploaded = false; // Reset for next image
+        imageEnhanced = false;
+    }
+}
+
+// 🔹 Update count in backend
+async function updateImageCount() {
+    const email = localStorage.getItem("userEmail");
+
+    if (!email) {
+        console.error("No email found. User might not be logged in.");
+        return;
+    }
+
+    try {
+        const response = await fetch("http://127.0.0.1:5000/update_image_count", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+        if (response.status === 200) {
+            imageCount = data.image_count; // ✅ Update with backend value
+            document.getElementById("imageCountBtn").innerText = `Image Counter: ${imageCount}`;
+        } else {
+            console.error("Error updating image count:", data.message);
+        }
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+}
+
+// 🔹 Show the count when button is clicked
+document.getElementById("imageCountBtn").addEventListener("click", function() {
+    document.getElementById("imageCountText").innerText = `No. of images converted: ${imageCount}`;
+    let container = document.querySelector(".container");
+
+    // Add blur effect
+    container.classList.add("dialog-active");
+
+    // Set user level
+    let level = Math.ceil(imageCount / 10);
+    document.getElementById("levelText").innerText = `Level: ${level}`;
+
+    // Show box & overlay
+    document.getElementById("infoBox").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+});
+// Close the box & remove dimming effect
+function closeBox() {
+    document.querySelectorAll(".dialog-active").forEach(el => {
+        el.classList.remove("dialog-active");
+    });
+    document.getElementById("infoBox").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
