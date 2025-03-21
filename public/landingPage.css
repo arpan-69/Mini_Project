@@ -14,6 +14,12 @@ body {
     text-align: center;
 }
 
+.container {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
 body::before {
     content: "";
     position: fixed;
@@ -56,7 +62,6 @@ header {
 nav a {
     color: white;
     text-decoration: none;
-    margin: 0 15px;
     font-size: 18px;
     transition: color 0.3s, text-shadow 0.3s;
 }
@@ -137,22 +142,51 @@ button:active, .btn:active {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
-    margin-left: -60px;
 }
 
 .hero .no-card {
     font-size: 14px;
     opacity: 0.7;
-    margin-left: -60px;
 }
 
 /* Dashboard Section */
 .dashboard {
-    margin-top: 0px;
+    margin-top: 40px;
 }
 
 .dashboard img {
-    max-width: 45%;
+    max-width: 80%;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .dashboard img {
+        max-width: 95%;
+    }
+
+    .btn, .hero .cta {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
 }
