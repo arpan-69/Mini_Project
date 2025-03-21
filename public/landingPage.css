@@ -1,0 +1,158 @@
+/* General Styles */
+
+body {
+    background-image: url("landingPageBackground.png");
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+    background-repeat: no-repeat; 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    opacity: 1;
+    color: white;
+    text-align: center;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #111a25, #283c54);
+    opacity: 0.8;
+    z-index: -1; 
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;  /* Align items vertically */
+    gap: 10px; /* Add space between icon and text */
+}
+
+.logo img {
+    height: 60px; /* Adjust as needed */
+}
+
+.logo-text {
+    font-size: 26px;
+    font-weight: bold;
+    color: white; /* Change color if needed */
+    text-shadow: 0 0 10px #000000, 0 0 20px #63bb8f;
+}
+
+
+/* Nav Links Hover Effect */
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+    color: #28d17c;  /* Green glow color */
+    text-shadow: 0 0 10px #28d17c, 0 0 20px #28d17c;
+}
+
+/* Button Styles */
+button, .btn {
+    background-color: #28d17c;  /* Green color */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+
+/* Hover Effect */
+button:hover, .btn:hover {
+    background-color: #22b569;  /* Darker green */
+    box-shadow: 0 0 15px #28d17c, 0 0 30px #28d17c;
+    transform: translateY(-2px); /* Slight lift */
+}
+
+/* Active Effect (Click) */
+button:active, .btn:active {
+    transform: translateY(0); /* Reset lift */
+    box-shadow: 0 0 5px #28d17c, 0 0 10px #28d17c;
+}
+
+
+.header-buttons .signup {
+    background: none;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.header-buttons .cta {
+    background: #28d17c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    margin-top: 50px;
+    position: relative;
+}
+
+.hero h1 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.hero .cta {
+    background: #28d17c;
+    border: none;
+    padding: 15px 25px;
+    font-size: 20px;
+    left: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: -60px;
+}
+
+.hero .no-card {
+    font-size: 14px;
+    opacity: 0.7;
+    margin-left: -60px;
+}
+
+/* Dashboard Section */
+.dashboard {
+    margin-top: 0px;
+}
+
+.dashboard img {
+    max-width: 45%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}

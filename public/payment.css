@@ -1,0 +1,235 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    font-size: 16px;
+  }
+  
+  body {
+    background: #f7f7ff;
+    font-family: "Montserrat", sans-serif;
+    width: 80%;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+  }
+  
+  header {
+    color: hsl(233, 13%, 49%);
+    margin: 52px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between image and text */
+}
+
+.logo img {
+    height: 50px; /* Adjust logo size */
+    width: auto;
+}
+
+.logo-text {
+    font-size: 26px;
+    font-weight: bold;
+    color: white; /* Change color if needed */
+    text-shadow: 0 0 10px #17740f, 0 0 20px #63bb8f;
+    font-family: Arial, sans-serif;
+}
+  
+  .toggle {
+    margin-top: 32px;
+    color: hsl(234, 14%, 74%);
+    display: flex;
+    align-items: center;
+  }
+  
+  .toggle-btn {
+    margin: 0 16px;
+  }
+  
+  .checkbox {
+    display: none;
+  }
+  
+  .sub {
+    background: linear-gradient(135deg, rgba(163, 168, 240, 1) 0%, rgba(105, 111, 221, 1) 100%);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 30px;
+    width: 52px;
+    border-radius: 26px;
+    padding: 5px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .circle {
+    background-color: #fff;
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .checkbox:checked + .sub {
+    justify-content: flex-end;
+  }
+  
+  .cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    background: #fff;
+    color: hsl(233, 13%, 49%);
+    border-radius: 12px;
+    padding: 32px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .cards .card.active {
+    background: linear-gradient(135deg, rgba(163, 168, 240, 1) 0%, rgba(105, 111, 221, 1) 100%);
+    color: #fff;
+    transform: scale(1.1);
+    z-index: 1;
+  }
+  
+  ul {
+    margin: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  ul li {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 16px 0;
+  }
+  
+  ul li.price {
+    font-size: 48px;
+    color: hsl(232, 13%, 33%);
+    padding-bottom: 32px;
+  }
+  
+  .shadow {
+    box-shadow: -5px 5px 15px 1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card.active .price {
+    color: #fff;
+  }
+  
+  .btn {
+    margin-top: 16px;
+    height: 42px;
+    width: 214px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    background: linear-gradient(135deg, rgba(163, 168, 240, 1) 0%, rgba(105, 111, 221, 1) 100%);
+    color: #fff;
+    outline: none;
+    border: 0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Hover effect */
+  .btn:hover {
+    background: linear-gradient(135deg, rgba(105, 111, 221, 1) 0%, rgba(163, 168, 240, 1) 100%);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(105, 111, 221, 0.3);
+  }
+  
+  /* Click animation */
+  .btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(105, 111, 221, 0.5);
+  }
+  
+  /* Active button (for professional plan) */
+  /* Default state */
+.active-btn {
+    background: #ffffff;
+    color: hsl(237, 63%, 64%);
+    border: 2px solid hsl(237, 63%, 64%);
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    cursor: pointer;
+    height: 42px;
+    width: 214px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Hover effect */
+  .active-btn:hover {
+    background: hsl(237, 63%, 90%); /* Lighter shade of the original color */
+    color: hsl(237, 63%, 40%);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(105, 111, 221, 0.3);
+  }
+  
+  /* Click effect */
+  .active-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(105, 111, 221, 0.5);
+  }
+  
+  
+  
+  .bottom-bar {
+    border-bottom: 2px solid hsla(240, 8%, 85%, 0.582);
+  }
+  
+  .card.active .bottom-bar {
+    border-bottom: 2px solid hsla(240, 8%, 85%, 0.253);
+  }
+  
+  .pack {
+    font-size: 18px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .cards {
+      flex-direction: column;
+    }
+  
+    .card {
+      margin-bottom: 16px;
+    }
+  
+    .cards .card.active {
+      transform: scale(1);
+    }
+  }
+  

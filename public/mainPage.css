@@ -1,0 +1,404 @@
+body {
+    background-image: url("imagemain.png");
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+    background-repeat: no-repeat; 
+    color: white; 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    opacity: 1;
+    color: white;
+    text-align: center;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #111a25, #283c54);
+    opacity: 0.7;
+    z-index: -1; 
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;  /* Align items vertically */
+    gap: 10px; /* Add space between icon and text */
+}
+
+.logo img {
+    height: 60px; /* Adjust as needed */
+}
+
+.logo-text {
+    font-size: 26px;
+    font-weight: bold;
+    color: white; /* Change color if needed */
+    text-shadow: 0 0 10px #000000, 0 0 20px #63bb8f;
+}
+
+
+/* Light Mode */
+.light {
+    background-color: #f0f0f0;
+    color: black;
+}
+
+h1{
+    font-size: 45px;
+    margin-bottom: 30px; /* 100px gap between h1 and first button */
+    color: #d1d5db; /* Soft silver for a professional touch */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+h3{
+    font-size: 23px;
+    margin-bottom: 20px; /* 100px gap between h1 and first button */
+    color: #d1d5db; /* Soft silver for a professional touch */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* upload button */
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+}
+
+
+.custom-file-button {
+    position: relative;
+    padding: 20px 25px;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(0, 0, 50, 0.2); /* Slight dark blue tint */
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(0, 162, 255, 0.5); /* Neon Blue Border */
+    box-shadow: 0 0 10px rgba(0, 162, 255, 0.3);
+}
+
+.custom-file-button::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(0, 162, 255, 0.5) 10%, transparent 50%);
+    transition: 0.5s;
+}
+
+
+.custom-file-button:hover {
+    background: rgba(0, 162, 255, 0.2);
+    border-color: rgba(0, 162, 255, 0.8);
+    box-shadow: 0 0 20px rgba(0, 162, 255, 0.7);
+}
+
+.custom-file-button:hover::before {
+    top: 0;
+    left: 0;
+}
+
+
+.custom-file-button:active {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 162, 255, 1);
+}
+
+.file-name {
+    font-size: 18px;
+    color: #ddd;
+    text-align: center;
+    font-style: normal;
+}
+
+/* profile part */
+
+.profile-container {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-circle:hover {
+    transform: scale(1.1);
+}
+
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* Dialog Box - Dark Themed */
+.dialog-box {
+    position: absolute;
+    top: 80px;
+    right: 2px;
+    background: none;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    width: 200px;
+    padding: 18px;
+    display: none;
+    flex-direction: column;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* When Active (Make sure to add this class when showing the dialog) */
+.dialog-box.active {
+    display: flex;
+    opacity: 1;
+    transform: translate(0, 0); /* Moves back to original position */
+}
+
+/* Dialog Box Appears Smoothly */
+.profile-container:active + .dialog-box,
+.profile-container.clicked + .dialog-box {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Buttons inside the Dialog */
+.dialog-box button {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Theme Button */
+.theme-container {
+    position: relative;
+    width: 100%;
+}
+
+.theme-btn {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    background: #28a745;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.theme-btn:hover {
+    background: #218838;
+}
+
+/* Theme Options (Hidden by Default) */
+.theme-options {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #545c66;
+    padding: 15px;
+    border-radius: 25px;
+    position: absolute;
+    top: 53px;
+    left: -16px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Make it Appear on Hover */
+.theme-container:hover .theme-options {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Light Mode Adaptation */
+.light-mode .theme-options {
+    background: #ddd;
+}
+
+
+/* profile part end */
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 20px auto;
+    display: none;
+}
+
+.preview-container {
+    opacity: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: -25px;
+}
+
+.preview-box {
+    text-align: center;
+}
+
+.preview-area {
+    width: 400px;
+    height: 485px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #aaa;
+    background: #fff;
+    position: relative;
+}
+
+.arrow {
+    font-size: 40px;
+    display: none;
+}
+
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ccc;
+    border-top-color: #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#preview, #enhancedPreview {
+    max-width: 100%;
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    margin-top: 35px;
+    margin-left: 10px;
+}
+
+button {
+    position: relative;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(0, 0, 50, 0.2); /* Slight dark blue tint */
+    color: white;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(0, 162, 255, 0.5); /* Neon Blue Border */
+    box-shadow: 0 0 10px rgba(0, 162, 255, 0.3);
+}
+
+/* Neon Blue Glow Effect */
+button::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(0, 162, 255, 0.5) 10%, transparent 50%);
+    transition: 0.5s;
+}
+
+/* Button Hover Effect */
+button:hover {
+    background: rgba(0, 162, 255, 0.2);
+    border-color: rgba(0, 162, 255, 0.8);
+    box-shadow: 0 0 20px rgba(0, 162, 255, 0.7);
+}
+
+/* Button Hover Glow */
+button:hover::before {
+    top: 0;
+    left: 0;
+}
+
+/* Active Click Effect */
+button:active {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 162, 255, 1);
+}
+
+.dark .preview-area {
+    border-color: #555;
+    background: #333;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="range"] {
+    width: 100px;
+    cursor: pointer;
+    appearance: none;
+    background: linear-gradient(to right, #fff, #333);
+    border-radius: 10px;
+}

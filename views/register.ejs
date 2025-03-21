@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="loginRegister.css">
+    <title>Register | Ludiflex</title>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="icon.png" alt="logo">
+            <span class="logo-text">RenderX</span>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <div class="form-header">
+            <div class="title-register">Register</div>
+        </div>
+        
+        <!-- REGISTER FORM -->
+        <form  class="register-form" autocomplete="off">
+            <div class="input-box">
+                <input type="text" name="username" class="input-field" id="username" required>
+                <label for="reg-name" class="label">Username</label>
+                <i class='bx bx-user icon'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" name="email" class="input-field" id="email" required>
+                <label for="reg-email" class="label">Email</label>
+                <i class='bx bx-envelope icon'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" class="input-field" id="password" required>
+                <label for="reg-pass" class="label">Password</label>
+                <i class='bx bx-lock-alt icon'></i>
+            </div>
+            <div class="form-cols">
+                <div class="col-1">
+                    <input type="checkbox" id="agree">
+                    <label for="agree"> I agree to terms & conditions</label>
+                </div>
+            </div>
+            <div class="input-box">
+                <button class="btn-submit" id="SignUpBtn">Sign Up <i class='bx bx-user-plus'></i></button>
+            </div>
+            <p class="register-message"></p>
+            <div class="switch-form">
+                <span>Already have an account? <a href="/login">Login</a></span>
+            </div>
+        </form>
+    </div>
+
+    <script src="register.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+    <title>Pricing Table Component</title>
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+  <header>
+    <h1>Our Pricing</h1>
+    <div class="logo">
+      <img src="icon.png" alt="logo">
+      <span class="logo-text">RenderX</span>
+    </div>
+    <div class="toggle">
+      <label>Annually </label>
+      <div class="toggle-btn">
+        <input type="checkbox" class="checkbox" id="checkbox" />
+        <label class="sub" id="sub" for="checkbox">
+          <div class="circle"></div>
+        </label>
+      </div>
+      <label> Monthly</label>
+    </div>
+  </header>
+  <div class="cards">
+    <div class="card shadow">
+      <ul>
+        <li class="pack">Basic</li>
+        <li id="basic" class="price bottom-bar">Rs 199.99</li>
+        <li class="bottom-bar">5 GB Storage</li>
+        <li class="bottom-bar">2 Users Allowed</li>
+        <li class="bottom-bar">Convert up to 500 images</li>
+        <li><button class="btn">Learn More</button></li>
+      </ul>
+    </div>
+    <div class="card active">
+      <ul>
+        <li class="pack">Professional</li>
+        <li id="professional" class="price bottom-bar">Rs 249.99</li>
+        <li class="bottom-bar">10 GB Storage</li>
+        <li class="bottom-bar">3 Users Allowed</li>
+        <li class="bottom-bar">Convert up to 1K images</li>
+        <li><button class="btn active-btn">Learn More</button></li>
+      </ul>
+    </div>
+    <div class="card shadow">
+      <ul>
+        <li class="pack">Master</li>
+        <li id="master" class="price bottom-bar">Rs 399.99</li>
+        <li class="bottom-bar">20 GB Storage</li>
+        <li class="bottom-bar">5 Users Allowed</li>
+        <li class="bottom-bar">Convert up to 2K images</li>
+        <li><button class="btn">Learn More</button></li>
+      </ul>
+    </div>
+  </div>
+  <script src="payment.js"></script>
+</body>
+</html>
