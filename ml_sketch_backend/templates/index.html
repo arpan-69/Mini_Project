@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SketchAI - ML Sketch Translator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='ml_model.css') }}">
@@ -12,13 +12,37 @@
             <div class="logo-icon">S</div>
             <span>SketchAI</span>
         </div>
+        <!-- Add this inside the header element in index.html -->
+        <div class="theme-toggle" id="theme-toggle">
+            <div class="theme-toggle-icon">
+                <svg id="light-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg id="dark-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </div>
+            <span class="theme-toggle-text" id="theme-text">Dark Mode</span>
+        </div>
     </header>
 
     <main>
         <div class="container">
+                <!-- Decorative elements -->
+            <div class="decorative-circle circle-1"></div>
+            <div class="decorative-circle circle-2"></div>
             <form id="sketch-form" action="/generate" method="post" enctype="multipart/form-data" onsubmit="return false;">
                 <!-- Frame 1: Sketch Upload -->
-                <div class="frame active" id="frame-1">
+
+                <label for="sketch-upload" class="frame active" id="frame-1">
                     <div class="frame-header">
                         <h2>ML Model Sketch Translator</h2>
                         <p>Transform your sketches into realistic images with our AI models</p>
@@ -30,8 +54,8 @@
                             </svg>
                             <h3>Upload Your Sketch</h3>
                             <p>Drag and drop your sketch file here or click to browse</p>
-                            <p>Supported formats: JPG, PNG, SVG (Max 5MB)</p>
-                            <input type="file" id="sketch-upload" name="file" accept=".jpg,.jpeg,.png,.svg">
+                            <p>Supported formats: JPG, PNG, JPEG(Max 5MB)</p>
+                            <input type="file" id="sketch-upload" name="file" accept=".jpg,.jpeg,.png">
                             <img src="{{ url_for('static', filename='placeholder/400/320') }}" alt="Preview" class="preview-image" id="preview-image">
                         </div>
                     </div>
@@ -39,7 +63,7 @@
                         <div></div>
                         <button type="button" class="btn btn-primary" id="next-1">Next <span>→</span></button>
                     </div>
-                </div>
+                </label>
 
                 <!-- Frame 2: Model Selection -->
                 <div class="frame" id="frame-2">
