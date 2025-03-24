@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Enhancer</title>
+    <title>Image Enhancer | RenderX</title>
     <link rel="stylesheet" href="/mainPage.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body class="dark">
     <div class="logo">
-        <img src="icon.png" alt="logo">
+        <img src="/icon.png" alt="logo">
         <span class="logo-text">RenderX</span>
     </div>
 
@@ -27,36 +28,50 @@
 
     <div class="container">
         <h1>Upload & Enhance Image</h1>
-        <div class="file-upload-container">
-            <label for="fileInput" class="custom-file-button">Upload Image</label>
-            <input type="file" id="fileInput" accept="image/*" hidden>
-            <p id="fileName" class="file-name"></p>
-        </div>
+        <form id="enhanceForm" enctype="multipart/form-data">
+            <div class="file-upload-container">
+                <label for="fileInput" class="custom-file-button">Upload Image</label>
+                <input type="file" id="fileInput" name="file" accept="image/*" hidden required>
+                <p id="fileName" class="file-name"></p>
+            </div>
 
-        <div class="preview-container">
-            <div class="preview-box">
-                <h3>Original</h3>
-                <div class="preview-area">
-                    <div class="loader hidden"></div>
-                    <img id="preview" alt="Original Image Preview">
+            <div class="model-selection">
+                <label for="model">Select Model:</label>
+                <select id="model" name="model">
+                    <option value="flowers">Flowers</option>
+                    <option value="shoes">Shoes</option>
+                    <option value="cats">Cats</option>
+                    <option value="birds">Birds</option>
+                    <option value="faces">Faces</option>
+                </select>
+            </div>
+
+            <div class="preview-container">
+                <div class="preview-box">
+                    <h3>Original</h3>
+                    <div class="preview-area">
+                        <div class="loader hidden"></div>
+                        <img id="preview" alt="Original Image Preview">
+                    </div>
+                </div>
+                <div class="arrow">➡</div>
+                <div class="preview-box">
+                    <h3>Enhanced</h3>
+                    <div class="preview-area">
+                        <div class="loader hidden"></div>
+                        <img id="enhancedPreview" alt="Enhanced Image Preview">
+                    </div>
                 </div>
             </div>
-            <div class="arrow">➡</div>
-            <div class="preview-box">
-                <h3>Enhanced</h3>
-                <div class="preview-area">
-                    <div class="loader hidden"></div>
-                    <img id="enhancedPreview" alt="Enhanced Image Preview">
-                </div>
-            </div>
-        </div>
 
-        <div class="button-container">
-            <button id="enhanceBtn" class="hidden">Enhance Image</button>
-            <button id="downloadBtn" class="hidden">Download Image</button>
-        </div>
+            <div class="button-container">
+                <button type="submit" id="enhanceBtn">Enhance Image</button>
+                <button id="downloadBtn" class="hidden">Download Image</button>
+            </div>
+            <p id="enhanceMessage"></p>
+        </form>
     </div>
 
-    <script src="mainPage.js"></script>
+    <script src="/enhance.js"></script>
 </body>
 </html>

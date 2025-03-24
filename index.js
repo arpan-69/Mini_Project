@@ -1,52 +1,60 @@
-const express=require('express')
+const express = require('express');
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const jwt=require('jsonwebtoken')
-const cookieParser=require('cookie-parser')
-const User=require('./models/user')
-require('dotenv').config()
-const dbURL=process.env.DB_URL
-const app=express()
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+const User = require('./models/user');
+require('dotenv').config();
+const axios = require('axios');
+const FormData = require('form-data');
+const fileUpload = require('express-fileupload');
+const path = require('path');
 
-app.set('view engine','ejs')
-app.use(express.static('public'))
+const app = express();
 
-app.use(express.urlencoded({extended:true}))
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+
+// Debug the static folder path
+const staticPath = path.join(__dirname, 'static');
+console.log("Serving static files from:", staticPath);
+app.use(express.static(staticPath));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
+app.use(fileUpload());
 
-const secret=process.env.SECRET
+const FLASK_URL = process.env.FLASK_URL || 'http://localhost:5000';
+console.log("Using Flask URL:", FLASK_URL);
 
-mongoose.connect(dbURL, {
+// Rest of the code remains the same...
+const secret = process.env.SECRET;
+
+mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => console.log("MongoDB Connected")).catch(err => console.log("Error:", err));
 
-
 const authenticationMiddleWare = async (req, res, next) => {
     try {
         const userToken = req.cookies.clientToken;
-        
         if (!userToken) {
             console.log("No token found. Redirecting to /login");
-            return res.redirect('/login'); 
+            return res.redirect('/login');
         }
 
         const userVerified = jwt.verify(userToken, secret);
         console.log("User Verified:", userVerified);
 
-        req.user = userVerified; 
+        req.user = userVerified;
         next();
     } catch (error) {
         console.error("Token Verification Failed:", error.message);
-        return res.redirect('/login'); 
+        return res.redirect('/login');
     }
 };
 
-
-
-
-app.post('/register',async(req,res)=>{
+app.post('/register', async (req, res) => {
     try {
         console.log("Register Request Body:", req.body);
         const { username, email, password } = req.body;
@@ -65,25 +73,23 @@ app.post('/register',async(req,res)=>{
         const hash = await bcrypt.hash(password, salt);
 
         const newUser = new User({
-            username:username,
-            email:email,
+            username: username,
+            email: email,
             password: hash
         });
 
         await newUser.save();
         console.log("User registered successfully:", email);
         res.status(201).json({ message: "User registered successfully" });
-
     } catch (error) {
         console.error("Register error:", error.message);
         res.status(500).json({ message: "Server error", error: error.message });
     }
-})
+});
 
 app.post("/login", async (req, res) => {
     try {
         console.log("Login Request:", req.body);
-
         const { email, password } = req.body;
 
         if (!email || !password) {
@@ -104,68 +110,70 @@ app.post("/login", async (req, res) => {
         }
 
         const tokenForClient = jwt.sign(
-            { id: user._id, username: user.username }, 
+            { id: user._id, username: user.username },
             secret
         );
 
-        console.log("Generated Token:", tokenForClient); 
+        console.log("Generated Token:", tokenForClient);
 
         res.cookie("clientToken", tokenForClient, {
-            httpOnly: false, 
-            secure: false,  
-            sameSite: "Lax", 
+            httpOnly: false,
+            secure: false,
+            sameSite: "Lax",
             maxAge: 60 * 60 * 1000
         });
 
         console.log("Cookie Set Successfully");
 
         res.status(200).json({ message: "Login successful" });
-
     } catch (error) {
         console.error("Server error:", error);
         res.status(500).json({ message: "Server error", error: error.message });
     }
 });
 
+app.post('/enhanceImage', authenticationMiddleWare, async (req, res) => {
+    try {
+        if (!req.files || !req.files.file) {
+            return res.status(400).json({ error: "No image file provided" });
+        }
 
-app.get('/',(req,res)=>{
-    res.render('landing.ejs')
-})
+        const file = req.files.file;
+        const modelType = req.body.model || "flowers";
 
-app.get('/login',(req,res)=>{
-    res.render('login.ejs')
-})
+        const formData = new FormData();
+        formData.append("file", file.data, file.name);
+        formData.append("model", modelType);
 
-app.get('/register',(req,res)=>{
-    res.render('register.ejs')
-})
+        const flaskResponse = await axios.post('http://localhost:5000/generate', formData, {
+            headers: {
+                ...formData.getHeaders(),
+            },
+        });
 
-app.get('/support',(req,res)=>{
-    res.render('support.ejs')
-})
+        res.status(flaskResponse.status).json(flaskResponse.data);
+    } catch (error) {
+        console.error("Error proxying to Flask:", error.message);
+        res.status(500).json({ error: "Failed to process image", details: error.message });
+    }
+});
 
-app.get('/payment',(req,res)=>{
-    res.render('payment.ejs')
-})
-
-app.get('/choseModel',authenticationMiddleWare,(req,res)=>{
-    res.render('choseModel.ejs')   
-})
-
-app.get('/imageEnhancer',authenticationMiddleWare,(req,res)=>{
-    res.render('mainPage.ejs')
-})
+app.get('/', (req, res) => res.render('landing.ejs'));
+app.get('/login', (req, res) => res.render('login.ejs'));
+app.get('/register', (req, res) => res.render('register.ejs'));
+app.get('/support', (req, res) => res.render('support.ejs'));
+app.get('/payment', (req, res) => res.render('payment.ejs'));
+app.get('/choseModel', authenticationMiddleWare, (req, res) => res.render('choseModel.ejs'));
+app.get('/imageEnhancer', authenticationMiddleWare, (req, res) => res.render('mainPage.ejs'));
 
 app.get("/logout", (req, res) => {
     res.clearCookie("clientToken", {
         httpOnly: true,
-        secure: false, 
+        secure: false,
         sameSite: "Lax"
     });
     console.log("✅ User logged out. Cookie cleared.");
-
     res.redirect("/login");
 });
 
-
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3000, () => console.log(`Server running on port ${process.env.PORT || 3000}`));

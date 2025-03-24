@@ -372,6 +372,82 @@ input[type="range"] {
     border-radius: 10px;
 }
 
+/* New Styles for Added Elements */
+.model-selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.model-selection label {
+    font-size: 18px;
+    color: #d1d5db;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.model-selection select {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(0, 0, 50, 0.2);
+    color: white;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(0, 162, 255, 0.5);
+    box-shadow: 0 0 10px rgba(0, 162, 255, 0.3);
+}
+
+.model-selection select:hover {
+    background: rgba(0, 162, 255, 0.2);
+    border-color: rgba(0, 162, 255, 0.8);
+    box-shadow: 0 0 20px rgba(0, 162, 255, 0.7);
+}
+
+.model-selection select:focus {
+    outline: none;
+    border-color: rgba(0, 162, 255, 1);
+}
+
+#enhanceMessage {
+    font-size: 18px;
+    color: #ddd;
+    text-align: center;
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Optional: Styles for Download Options (if using PNG/JPG links) */
+#downloadOptions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#downloadOptions a {
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 12px;
+    background: rgba(0, 0, 50, 0.2);
+    color: white;
+    text-decoration: none;
+    transition: all 0.4s ease-in-out;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(0, 162, 255, 0.5);
+    box-shadow: 0 0 10px rgba(0, 162, 255, 0.3);
+}
+
+#downloadOptions a:hover {
+    background: rgba(0, 162, 255, 0.2);
+    border-color: rgba(0, 162, 255, 0.8);
+    box-shadow: 0 0 20px rgba(0, 162, 255, 0.7);
+}
+
 /* Enhanced Responsive Design */
 @media screen and (max-width: 1024px) {
     .container {
@@ -386,6 +462,15 @@ input[type="range"] {
     .custom-file-button {
         padding: 15px 20px;
         font-size: 18px;
+    }
+
+    .model-selection select {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    #enhanceMessage {
+        font-size: 16px;
     }
 }
 
@@ -459,6 +544,20 @@ input[type="range"] {
         padding: 15px 20px;
         font-size: 16px;
     }
+
+    .model-selection {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .model-selection select {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    #enhanceMessage {
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -503,5 +602,14 @@ input[type="range"] {
     .custom-file-button {
         padding: 12px 15px;
         font-size: 14px;
+    }
+
+    .model-selection select {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    #enhanceMessage {
+        font-size: 12px;
     }
 }
