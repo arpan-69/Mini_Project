@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload());
 
-const FLASK_URL = process.env.FLASK_URL || 'http://localhost:5000';
+const FLASK_URL = 'http://localhost:5000'||process.env.FLASK_URL;
 console.log("Using Flask URL:", FLASK_URL);
 
 // Rest of the code remains the same...
@@ -145,26 +145,15 @@ app.post('/enhanceImage', authenticationMiddleWare, async (req, res) => {
         formData.append("file", file.data, file.name);
         formData.append("model", modelType);
 
-        console.log(`Proxying request to Flask at: ${FLASK_URL}/generate`);
-        console.log("Model type:", modelType);
-
         const flaskResponse = await axios.post(`${FLASK_URL}/generate`, formData, {
             headers: {
                 ...formData.getHeaders(),
             },
-            timeout: 60000, // Set a 60-second timeout for the request
         });
 
         res.status(flaskResponse.status).json(flaskResponse.data);
     } catch (error) {
-        console.error("Error proxying to Flask:", {
-            message: error.message,
-            code: error.code,
-            response: error.response ? {
-                status: error.response.status,
-                data: error.response.data,
-            } : null,
-        });
+        console.error("Error proxying to Flask:", error.message);
         res.status(500).json({ error: "Failed to process image", details: error.message });
     }
 });
