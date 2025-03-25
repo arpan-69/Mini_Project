@@ -145,15 +145,26 @@ app.post('/enhanceImage', authenticationMiddleWare, async (req, res) => {
         formData.append("file", file.data, file.name);
         formData.append("model", modelType);
 
-        const flaskResponse = await axios.post('http://localhost:5000/generate', formData, {
+        console.log(`Proxying request to Flask at: ${FLASK_URL}/generate`);
+        console.log("Model type:", modelType);
+
+        const flaskResponse = await axios.post(`${FLASK_URL}/generate`, formData, {
             headers: {
                 ...formData.getHeaders(),
             },
+            timeout: 60000, // Set a 60-second timeout for the request
         });
 
         res.status(flaskResponse.status).json(flaskResponse.data);
     } catch (error) {
-        console.error("Error proxying to Flask:", error.message);
+        console.error("Error proxying to Flask:", {
+            message: error.message,
+            code: error.code,
+            response: error.response ? {
+                status: error.response.status,
+                data: error.response.data,
+            } : null,
+        });
         res.status(500).json({ error: "Failed to process image", details: error.message });
     }
 });
