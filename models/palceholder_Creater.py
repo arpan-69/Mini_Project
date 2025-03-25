@@ -1,12 +1,3 @@
-import os
-from PIL import Image
-
-# Create the necessary directories
-output_dir = '../static/placeholder/400'
-os.makedirs(output_dir, exist_ok=True)
-
-# Create a placeholder image (400x320) with a solid color
-placeholder_image = Image.new('RGB', (400, 320), color=(200, 200, 200))
-
-# Save the placeholder image to the specified path
-placeholder_image.save(os.path.join(output_dir, '320.png'))
+version https://git-lfs.github.com/spec/v1
+oid sha256:deb57bf57f2f53fe1565cf05f9fbaf6198e0c9359d68d09abde3c88ee220c637
+size 390
