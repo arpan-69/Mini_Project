@@ -1,8 +1,39 @@
-# Mini_Project
-"Mini Project: Bidirectional Image Conversion: Sketch to Real and Real to Sketch"
+Here's the full updated `README.md` content that includes both parts: your **Bidirectional GAN mini project** and the **RenderX web application**:
+
+````markdown
+# Mini Project: Bidirectional Image Conversion — Sketch to Real and Real to Sketch
+
+This project explores a deep learning-based approach for **bidirectional image conversion**: generating realistic images from sketches and converting real images into sketch-like representations.
+
+---
+
+## 🧠 Bidirectional GAN (BiGAN)
+
+A PyTorch-based implementation of a **Bidirectional Generative Adversarial Network (BiGAN)** designed to learn efficient bidirectional mappings between image and latent spaces.
+
+### 🔍 Overview
+
+BiGANs extend traditional GANs by introducing an encoder network, enabling the model to learn both image generation and inverse mapping tasks — a core idea for sketch-to-real and real-to-sketch transformations.
+
+### ⚙️ Architecture
+
+- **Generator (G)**: Maps latent vector `z` to image `x`
+- **Encoder (E)**: Maps image `x` to latent vector `z`
+- **Discriminator (D)**: Differentiates between real `(x, E(x))` and fake `(G(z), z)` pairs
+
+### 🧪 Training
+
+- Dataset: shoes, celeba, flower, birds, cats
+- Latent Dim: 64
+- Epochs: 100
+- Loss: Binary Cross-Entropy (BCE)
+- Evaluation: Visual comparison, reconstruction quality
+
+---
+
 # RenderX - AI Image Enhancer ✨🖼️
 
-RenderX is an AI-powered web application that transforms low-quality images into high-quality visuals using advanced image processing and deep learning. Designed with a modern UI, it allows users to seamlessly upload, enhance, and download images with smooth animations and user-centric features.
+**RenderX** is an AI-powered web application that transforms low-quality images into high-quality visuals using advanced image processing and deep learning. It features a sleek UI and seamless user experience for image enhancement.
 
 ## 🚀 Features
 
@@ -14,24 +45,65 @@ RenderX is an AI-powered web application that transforms low-quality images into
 - 📁 Upload and download enhanced images
 - 🔐 Full user authentication (login/register/logout)
 - 🎨 Intuitive and responsive frontend with modern UI
-- 🛠️ Flask + Python backend integrated with AI models
 
 ## 🛠️ Tech Stack
 
-**Frontend**  
-- HTML5, CSS3, JavaScript  
-- Responsive design with animations  
-- Profile dialog with theme switching (radio button based)
+### Frontend
 
-**Backend**  
-- Python, Flask  
-- Image processing with OpenCV + AI model (can be upgraded to ESRGAN or similar)  
-- User authentication system  
-- MongoDB (or preferred DB) integration  
+- HTML5, CSS3, JavaScript
+- Responsive design with animations
+- Theme toggle using radio buttons
+- Profile dialog with hover effects
+
+### Backend
+
+- Python + Flask
+- Image processing: OpenCV, PIL, AI models (e.g., ESRGAN or custom)
+- User authentication
+- MongoDB (or preferred DB)
 
 ## 📦 Installation & Setup
 
-1. **Clone the repository**  
+1. Clone the repository:
    ```bash
    git clone https://github.com/sankhyapatra0808/renderx.git
    cd renderx
+````
+
+2. (Optional) Create and activate a virtual environment:
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Run the Flask server:
+
+   ```bash
+   python app.py
+   ```
+
+5. Open the app in your browser at `http://localhost:5000`
+
+---
+
+## 📚 References
+
+* Donahue, J., Krähenbühl, P., & Darrell, T. (2016). *Adversarial Feature Learning*. arXiv:1605.09782
+* Goodfellow et al. (2014). *Generative Adversarial Nets*
+
+## 📃 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🤝 Contributing
+
+Pull requests and feedback are welcome! If you have suggestions or improvements, feel free to fork the repo and submit a PR.
