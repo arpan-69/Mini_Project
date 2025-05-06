@@ -60,7 +60,7 @@ BiGANs extend traditional GANs by introducing an encoder network, enabling the m
 
 - Python + Flask
 - Image processing with OpenCV and PIL
-- Deep learning models (e.g., ESRGAN or custom-trained BiGAN)
+- Deep learning models (PIX2PIX GAN)
 - MongoDB (or any preferred database)
 - User authentication system
 
